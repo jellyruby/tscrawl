@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
 
-async () => {
+const getHtml = async (url:string) => {
 
     const browser = await puppeteer.launch({
         headless: true
@@ -14,5 +14,10 @@ async () => {
         height: 768
     });
 
+    await page.goto(url);
 
+    return await page.content();
 }
+
+
+export default getHtml;
