@@ -77,3 +77,35 @@ type weatheralert = `today weather is ${weather}`
 const weathercast :weatheralert = 'today weather is snow';
 
 
+enum tester {
+    a,
+    b,
+    c,
+    d,
+
+}
+
+
+const typeOfTest = {
+
+    a:1,
+    b:2,
+    c:3,
+    d:4,
+    e:5
+
+}  as const
+
+type typeOf = typeof typeOfTest[keyof typeof typeOfTest];
+
+type  xy = { lat : number } & {lon : number};
+const babo : xy = {lat : 1 , lon :2}
+
+// Union | 
+//둘중 하나만 있음 됨
+//객체의 속성에서도 하나만 있음 됨
+
+// intersection & 
+//일반적인 상황에서 사용 X 객체엥서만 가능
+// 모든 속성이 다 있어야한단읨
+
