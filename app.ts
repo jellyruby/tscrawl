@@ -109,3 +109,17 @@ const babo : xy = {lat : 1 , lon :2}
 //일반적인 상황에서 사용 X 객체엥서만 가능
 // 모든 속성이 다 있어야한단읨
 
+//type alias 코드를 마치 상속처럼 사용할수 있다
+
+
+type animal = {
+	move : true
+}
+
+type poyouryu = animal & {
+	eat : true
+}
+
+type human = poyouryu & {
+	think : true
+}

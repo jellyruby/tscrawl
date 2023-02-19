@@ -8,17 +8,12 @@ interface parsetHtmlDetailInterface {
 
 
 //Html string을 파싱한다.
-export const parseHtml = (html:string, callBack:Function) => {
-
-    const $ = cheerio.load(html);
-    callBack();
-
-}
+export const getCheerioFromHtml = (html:string) => cheerio.load(html);
 
 
 
 //easterlywave에서 열대성 저기압 리스트를 가져온다.
-const parseTyphoonListFromEasterlyWave:parsetHtmlDetailInterface = ($) => {
+export const parseTyphoonListFromEasterlyWave:parsetHtmlDetailInterface = ($) => {
 
     const lists = $(".level");
     lists.each((index, list) => {
@@ -29,8 +24,5 @@ const parseTyphoonListFromEasterlyWave:parsetHtmlDetailInterface = ($) => {
     return new Array<TyphoonInfo>; //임시로 넣어뒀음. 나중에 파싱 추가하면 넣어야한다.
 }
 
-const parseList = {
-    parseTyphoonListFromEasterlyWave,
-    
-};
 
+parseTyphoonListFromEasterlyWave(getCheerioFromHtml('string'));
