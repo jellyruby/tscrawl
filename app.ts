@@ -123,3 +123,19 @@ type poyouryu = animal & {
 type human = poyouryu & {
 	think : true
 }
+
+//객체 리터럴 검사 로 인해 C는 실패 c2는 성공
+
+
+type A = {name:string};
+type B = {age: number};
+type AB = A | B;    //넓은타입
+
+type C = A & B; //좁은 타입
+
+const ab : AB = {name:'jonghwa'}
+const c: C = {name : 'jonghwa' , age: 10, merried : 'false'}; //불가능, 객체 리터럴 검사
+const object = {name : 'jonghwa' , age: 10, merried : 'false'} as const; //가능 (좁은 타입이기 때문)
+const c2: C =  object;
+
+const ab2 : AB = c2; // 넓은타입에 좁은타입이라 가능
