@@ -77,3 +77,65 @@ type weatheralert = `today weather is ${weather}`
 const weathercast: weatheralert = 'today weather is snow';
 
 
+enum tester {
+    a,
+    b,
+    c,
+    d,
+
+}
+
+
+const typeOfTest = {
+
+    a:1,
+    b:2,
+    c:3,
+    d:4,
+    e:5
+
+}  as const
+
+type typeOf = typeof typeOfTest[keyof typeof typeOfTest];
+
+type  xy = { lat : number } & {lon : number};
+const babo : xy = {lat : 1 , lon :2}
+
+// Union | 
+//둘중 하나만 있음 됨
+//객체의 속성에서도 하나만 있음 됨
+
+// intersection & 
+//일반적인 상황에서 사용 X 객체엥서만 가능
+// 모든 속성이 다 있어야한단읨
+
+//type alias 코드를 마치 상속처럼 사용할수 있다
+
+
+type animal = {
+	move : true
+}
+
+type poyouryu = animal & {
+	eat : true
+}
+
+type human = poyouryu & {
+	think : true
+}
+
+//객체 리터럴 검사 로 인해 C는 실패 c2는 성공
+
+
+type A = {name:string};
+type B = {age: number};
+type AB = A | B;    //넓은타입
+
+type C = A & B; //좁은 타입
+
+const ab : AB = {name:'jonghwa'}
+const c: C = {name : 'jonghwa' , age: 10, merried : 'false'}; //불가능, 객체 리터럴 검사
+const object = {name : 'jonghwa' , age: 10, merried : 'false'} as const; //가능 (좁은 타입이기 때문)
+const c2: C =  object;
+
+const ab2 : AB = c2; // 넓은타입에 좁은타입이라 가능
