@@ -139,3 +139,33 @@ const object = {name : 'jonghwa' , age: 10, merried : 'false'} as const; //가�
 const c2: C =  object;
 
 const ab2 : AB = c2; // 넓은타입에 좁은타입이라 가능
+
+//void 타입
+
+const human : ()=>void = ()=>{
+
+    return;
+    //아예return이 없거나
+    //return undefined;
+}
+
+//메서드엔 상관없음
+
+
+interface Human {
+    talk: ()=> void;
+
+}
+
+//이렇게 talk 메서드에 가능
+const human1: Human = {
+    talk : ()=>{return 1;}
+
+}
+
+
+//push의 target은 콜백은 숫자이다
+declare function forEach(arr : number[], callback : (el:number)=>void):void
+
+let target = [];
+forEach([1,2,3],(el)=>target.push(el))
