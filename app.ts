@@ -142,6 +142,32 @@ const ab2 : AB = c2; // 넓은타입에 좁은타입이라 가능
 
 //void 타입
 
+
+interface TestClass{
+
+  testX : string;
+  testY : Number | string;
+  testZ : Number | ``
+
+}
+
+
+
+
+
+class TestClass implements TestClass {
+
+    testX = '123';
+    testY = '123';
+    constructor(){
+      
+      this.testY = '123';
+      testX = '123';
+
+    }
+
+}
+
 const human : ()=>void = ()=>{
 
     return;
@@ -169,3 +195,145 @@ declare function forEach(arr : number[], callback : (el:number)=>void):void
 
 let target = [];
 forEach([1,2,3],(el)=>target.push(el))
+
+
+
+
+//타입가드 ( 많이 쓰임 )
+
+
+
+function numOrStr( a: number | string ){
+
+  if(typeof(a) === "number"){  //타입가드
+    a.toFixed(1);
+  }
+  if(typeof(a) == "string"){
+    a.toLowerCase();
+  }
+
+  
+
+
+}
+
+
+
+class AA {
+  aaa() { 
+  }
+}
+
+class BB {
+  bbb(){
+
+  }
+}
+
+
+// union 타입중에서 타입 추론이 가능한경우에는 해당 타입이 된다. 
+// 여러개가 해당 될때는 유니온느오 남는다
+// 아무것도 해당안되면 never
+
+type unionA = {type: 'a'};
+type unionB = {type: 'b'};
+type unionC = {type: 'b'};
+
+
+const typeCheck = (type : unionA | unionB | unionC) => {
+
+  //값으로 추론
+  if(type.type === 'a'){ // unionA확정
+    type;
+
+  }else if (type.type === 'b'){
+      type; // unionB,C중하나
+  }else{
+    type;     // never
+  }
+
+
+}
+
+
+
+
+///유틸리티 타입 사용
+type Event1 = {
+  id : string;
+  title : string;
+  name : string;
+  age : string;
+};
+
+type Point = Event1 & {
+  target: string;
+  amount: number;
+};
+
+type PointInfo = Pick<Event1|Point, 'age' | 'title'>;
+type PointInfo2 = Exclude<Event1|Point, Event1>;  ///point는 event1을 상속받기 때문에 제외하면 무조건 둘다 불가능
+type PointInfo3 = Extract<Event1|Point, Event1>;  // event1 은 point릍 포함하고있기 때문에 event1이 존재하는걸 추출하면 둘다 나옴
+
+
+
+//커스텀 타입가드 (복잡한 경우,  is 아니면 타입추론이 안되거나, 너무 복잡해졌을때)
+interface Cat {
+  call : 'meow'  
+}
+
+interface Dog {
+  call : 'Bow'  
+}
+
+function catOrDog(a: Cat | Dog) : a is Cat{
+
+
+    if((a as Cat).call == 'meow') { return true }
+    return false;
+
+
+}
+
+
+//옵셔널
+
+
+const optionalTest : (a? : number) => void = (a) => {
+
+    return ;
+
+}
+
+optionalTest(1);
+
+
+
+
+
+//제네릭
+const genericTest : <T extends string | number >(x:T,y:T) => T = (x,y) => { 
+
+  return x + y;
+
+}
+
+
+//제네릭 예시
+// <T extends {...}> // 특정 객체
+// <T extends any[]> // 모든 배열
+// <T extends (...args: any) => any> // 모든 함수
+// <T extends abstract new (...args: any) => any> // 생성자 타입
+// <T extends keyof any> // string | number | symbol
+
+// genericTest(1,'2'); 실패
+// genericTest('1',2); 실패
+ genericTest(1,1);
+
+
+
+ const apocalypse = (alpha : number =3 ,beta : number=3) => {
+  
+ }
+
+
