@@ -134,7 +134,7 @@ type AB = A | B;    //넓은타입
 type C = A & B; //좁은 타입
 
 const ab : AB = {name:'jonghwa'}
-const c: C = {name : 'jonghwa' , age: 10, merried : 'false'}; //불가능, 객체 리터럴 검사
+// const c: C = {name : 'jonghwa' , age: 10, merried : 'false'}; //불가능, 객체 리터럴 검사
 const object = {name : 'jonghwa' , age: 10, merried : 'false'} as const; //가능 (좁은 타입이기 때문)
 const c2: C =  object;
 
@@ -154,19 +154,6 @@ interface TestClass{
 
 
 
-
-class TestClass implements TestClass {
-
-    testX = '123';
-    testY = '123';
-    constructor(){
-      
-      this.testY = '123';
-      testX = '123';
-
-    }
-
-}
 
 const human : ()=>void = ()=>{
 
@@ -312,13 +299,15 @@ optionalTest(1);
 
 
 //제네릭
-const genericTest : <T extends string | number >(x:T,y:T) => T = (x,y) => { 
+const genericTest : <T extends string | number > ( x:T , y:T) => T = (x,y) => { 
 
-  return x + y;
+  return x+y;
 
 }
 
+function add<T extends (a: string) => number>(x: T): T { return x }; 
 
+add((a)=>1)
 //제네릭 예시
 // <T extends {...}> // 특정 객체
 // <T extends any[]> // 모든 배열

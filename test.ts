@@ -125,6 +125,51 @@ const classtest = new Classtest('bobo',3232);
 
  ['123','234',123].forEach((quset)=>{
 
-    quset
+    
   
-   })
+   });
+
+
+
+   const predicate = (value:string | number) : value is string => typeof value === 'string';
+   const str = [1,'2',3,'4',5].filter(function(value) : value is string { return typeof value === 'string'}  )
+
+   console.log(str);
+
+
+
+
+
+   interface IterableNumArr<T extends number> extends Iterable<number> {
+    
+    forEach:(callback:(value:T)=>void) => void;
+   }
+   
+   const a: IterableNumArr<number> = [0,1,2,3];
+
+
+    interface Arr<T> {
+        forEach: (callback: (value: T) => void) => void;
+        filter (callback:(value:T,index:number) => boolean) : T[];
+        filter<U extends T> (callback: (value: T) => value is U) : T[];
+    }
+
+
+   const myArray : Arr<number> = [1,2,3,4,5];
+   myArray.filter((value): value is number =>{ return value % 2 === 0;})
+
+
+
+    type p<T,S extends keyof T> = {
+
+        [Key in S] : T[Key]
+
+
+    }
+
+    type u<T,S extends keyof T> = {
+
+        [Key in S] : T[Key]
+
+
+    }
