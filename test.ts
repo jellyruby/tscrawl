@@ -173,3 +173,5 @@ const classtest = new Classtest('bobo',3232);
 
 
     }
+
+    type R<T extends (...args:any) => any> = T extends (...args: infer A) => any ? A : never;
